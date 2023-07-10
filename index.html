@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | Tip calculator app</title>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Space Mono', monospace;
+      margin: 0;
+      padding: 0;
+      background-color: hsl(185, 41%, 84%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    /* Main Container */
+    .main-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 800px; /* Adjust the maximum width as needed */
+      width: 100%;
+      background-color: hsl(0, 0%, 100%);
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Container for form and result */
+    .container {
+      display: flex;
+    }
+
+    /* Form Container */
+    .form-container {
+      flex-grow: 1;
+      margin-right: 30px;
+      width: 350px;
+    }
+
+    /* Result Container */
+    .result-container {
+      flex-grow: 1;
+      background-color: hsl(183, 100%, 15%);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    /* Input Styles */
+    .form-container h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: hsl(186, 14%, 43%);
+    }
+
+    .bill-input,
+    .people-input {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border: 0;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      height: 30px;
+    }
+
+    .bill-input input,
+    .people-input input {
+      flex-grow: 1;
+      border: none;
+      outline: none;
+      font-size: 24px;
+    }
+
+    .currency-symbol,
+    .people-input span {
+      padding: 10px; 
+      border-radius: 5px 0 0 5px;
+    }
+
+    /* Button Styles */
+    .btn-container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .button-row button {
+      width: calc(33.33% - 10px);
+    }
+
+    .btn-container input[type="number"] {
+      width: 7rem;
+      height: 3rem;
+      color: hsl(183, 100%, 15%);
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      border-radius: 7px;
+      border: 0;
+      text-align: center;
+    }
+
+    input[type="number"] {
+      background-color: hsl(180, 35%, 94%);
+      color: hsl(183, 100%, 15%);
+    }
+
+  .bill-input input, .people-input input {
+    text-align: end;
+  }
+
+  
+    /* Amount Container */
+    .amount-container,
+    .total-container {
+      display: flex;
+      align-items: center;
+    }
+
+    #o-l {
+      color: hsl(189, 41%, 97%);
+      margin-right: 10px;
+      margin-bottom: 5px; /* Use a CSS variable for margin-bottom */
+    }
+
+    #soft-label {
+      color: hsl(184, 14%, 56%);
+    }
+
+    #tip-digits,
+    #total-digits {
+      color: hsl(172, 67%, 45%);
+      font-size: 50px;
+      font-weight: 700;
+      margin-left: auto;
+    }
+
+    #input-lbl {
+      color: hsl(186, 14%, 43%);
+      font-size: 20px;
+    }
+
+    /* Button Container */
+    .btn-container {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-container button {
+      width: 7rem;
+      height: 3rem;
+      padding: 10px 20px;
+      background-color: #00474b;
+      color: hsl(189, 41%, 97%);
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 20px;
+      border-radius: 7px;
+      border: 0;
+    }
+
+    .result-btn-container {
+      display: flex;
+      justify-content: center;
+    }
+
+    .result-btn-container button {
+      width: 25rem;
+      height: 3rem;
+      padding: 10px 20px;
+      background-color: hsl(183, 100%, 23%);
+      color: hsl(183, 100%, 15%);
+      font-size: 20px;
+      font-weight: bold;
+      margin-top: 5rem;
+      border-radius: 7px;
+      border: 0;
+      text-align: center;
+    }
+
+    button:hover {
+  background-color: hsla(172, 72%, 73%, 0.925);
+  color: hsl(183, 100%, 15%);
+  cursor: pointer;
+}
+
+button:active {
+  background-color: hsl(172, 68%, 38%);
+  color: hsl(183, 100%, 15%);
+  cursor: pointer;
+}
+
+.bill-input:hover,
+    .bill-input:focus,
+    .button-row input:hover,
+    .button-row input:focus,
+    .people-input:hover,
+    .people-input:focus {
+      border: 2px solid hsl(172, 67%, 45%);
+      cursor: pointer;
+    }
+
+    .bill-input, .people-input {
+      background-color: hsl(180, 35%, 94%);
+    }
+
+    .invalid {
+  border: 2px solid red;
+}
+
+
+    /* Input Styles */
+input {
+  font-family: 'Space Mono', monospace;
+}
+
+/* Button Styles */
+button {
+  font-family: 'Space Mono', monospace;
+}
+     
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="container">
+      <div class="form-container">
+        <div class="bill-container">
+          <h3 id="bill-lbl">Bill</h3>
+          <div class="bill-input">
+            <span class="currency-symbol"><img src="images\icon-dollar.svg" alt="dollar"></span>
+            <input type="number" id="bill-input" placeholder="0.00">
+          </div>
+        </div>
+        <div class="tip-container">
+          <h3 id="tip-lbl">Select Tip %</h3>
+          <div class="btn-container">
+            <div class="button-row">
+              <button type="button">5%</button>
+              <button type="button">10%</button>
+              <button type="button">15%</button>
+            </div>
+            <div class="button-row">
+              <button type="button">25%</button>
+              <button type="button">50%</button>
+              <input class="custom-input" type="number" placeholder="Custom">
+            </div>
+          </div>
+        </div>
+        <div class="people-container">
+          <h3 id="people-lbl">Number of People</h3>
+          <div class="people-input">
+            <span class="currency-symbol"><img src="images/icon-person.svg" alt="person"></span>
+            <input type="number" id="people-input" placeholder="0">
+          </div>
+        </div>
+      </div>
+      <div class="result-container">
+        <div class="amount-container">
+          <div id="tip-labels">
+            <h3 id="o-l">Tip Amount</h3>
+            <p id="soft-label">/ person</p>
+          </div>
+          <div id="tip-digits">
+            $0.00
+          </div>
+        </div>
+        <div class="total-container">
+          <div id="total-labels">
+            <h3 id="o-l">Total</h3>
+            <p id="soft-label">/ person</p>
+          </div>
+          <div id="total-digits">
+            $0.00
+          </div>
+        </div>
+        <div class="result-btn-container">
+          <button id="reset-button">RESET</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Get the input elements
+    const amountInput = document.getElementById('bill-input');
+    const peopleInput = document.getElementById('people-input');
+    const tipButtons = document.querySelectorAll('.button-row button');
+    const resetButton = document.getElementById('reset-button');
+
+    // Add event listeners to the input elements
+    amountInput.addEventListener('input', calculateTip);
+    peopleInput.addEventListener('input', calculateTip);
+
+    // Add event listeners to the tip buttons
+    tipButtons.forEach(button => {
+      button.addEventListener('click', handleTipButtonClick);
+    });
+
+    // Add event listener to the reset button
+    resetButton.addEventListener('click', resetForm);
+
+    // Function to handle tip button click
+    function handleTipButtonClick(event) {
+      const clickedButton = event.target;
+
+      // Remove the 'selected' class from all buttons
+      tipButtons.forEach(button => {
+        button.classList.remove('selected');
+      });
+
+      // Add the 'selected' class to the clicked button
+      clickedButton.classList.add('selected');
+
+      calculateTip();
+    }
+
+    // Function to calculate the tip
+    function calculateTip() {
+      const billAmount = parseFloat(amountInput.value);
+      const numberOfPeople = parseInt(peopleInput.value);
+      const selectedButton = document.querySelector('.button-row button.selected');
+      let tipPercentage;
+
+      if (selectedButton) {
+        tipPercentage = parseFloat(selectedButton.textContent);
+      } else {
+        const customInput = document.querySelector('.custom-input');
+        tipPercentage = parseFloat(customInput.value);
+      }
+
+      const tipAmount = billAmount * (tipPercentage / 100);
+      const totalAmount = billAmount + tipAmount;
+
+      // Update the displayed tip and total amounts
+      const tipDigits = document.getElementById('tip-digits');
+      const totalDigits = document.getElementById('total-digits');
+      tipDigits.textContent = `$${tipAmount.toFixed(2)}`;
+      totalDigits.textContent = `$${totalAmount.toFixed(2)}`;
+    }
+
+    // Function to reset the form
+    function resetForm() {
+      amountInput.value = '';
+      peopleInput.value = '';
+      tipButtons.forEach(button => {
+        button.classList.remove('selected');
+      });
+      const customInput = document.querySelector('.custom-input');
+      customInput.value = '';
+      const tipDigits = document.getElementById('tip-digits');
+      const totalDigits = document.getElementById('total-digits');
+      tipDigits.textContent = '$0.00';
+      totalDigits.textContent = '$0.00';
+    }
+  </script>
+</html>
