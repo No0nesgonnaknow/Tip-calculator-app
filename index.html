@@ -234,7 +234,56 @@ input {
 button {
   font-family: 'Space Mono', monospace;
 }
-     
+/* Mobile Styles (375px) */
+@media (max-width: 375px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .form-container,
+  .result-container {
+    margin-right: 0;
+    margin-bottom: 30px;
+    width: 100%;
+    overflow: auto; /* Add this line */
+  }
+
+  .result-container {
+    padding: 20px;
+  }
+
+  .button-row button {
+    width: 100%;
+  }
+
+  .btn-container input[type="number"] {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .result-btn-container button {
+    width: 100%;
+    margin-top: 3rem;
+  }
+}
+
+
+/* Desktop Styles (1440px) */
+@media (min-width: 1440px) {
+  .main-container {
+    max-width: 800px;
+  }
+
+  .container {
+    justify-content: space-between;
+  }
+
+  .form-container,
+  .result-container {
+    width: 350px;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -316,19 +365,20 @@ button {
     resetButton.addEventListener('click', resetForm);
 
     // Function to handle tip button click
-    function handleTipButtonClick(event) {
-      const clickedButton = event.target;
+function handleTipButtonClick(event) {
+  const clickedButton = event.target;
 
-      // Remove the 'selected' class from all buttons
-      tipButtons.forEach(button => {
-        button.classList.remove('selected');
-      });
+  // Remove the 'selected' class from all buttons
+  tipButtons.forEach(button => {
+    button.classList.remove('selected');
+  });
 
-      // Add the 'selected' class to the clicked button
-      clickedButton.classList.add('selected');
+  // Add the 'selected' class to the clicked button
+  clickedButton.classList.add('selected');
 
-      calculateTip();
-    }
+  calculateTip();
+}
+
 
     // Function to calculate the tip
     function calculateTip() {
